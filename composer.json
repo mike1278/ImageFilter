@@ -1,0 +1,29 @@
+{
+    "name": "mike/image-filter",
+    "description": "Image filter for laravel with intervention image",
+	"type": "laravel-module",
+    "authors": [
+        {
+            "name": "Roberto Micheletti",
+            "email": "michelettiroberto7@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0|^8.1",
+        "intervention/image": "^2.7",
+        "ext-fileinfo": "*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+				"ImageFilterServiceProvider"
+			],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ImageFilter\\": ""
+        }
+    }
+}

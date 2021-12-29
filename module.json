@@ -1,0 +1,17 @@
+{
+    "name": "ImageFilter",
+    "alias": "image_filter",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ImageFilter\\Providers\\ImageFilterServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+	"minimumCoreVersion": "",
+	"title": "",
+	"version": 0.1,
+	"author": "Roberto"
+}
