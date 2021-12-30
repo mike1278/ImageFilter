@@ -8,6 +8,8 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\ImageManagerStatic;
 use Modules\ImageFilter\Exceptions\InvalidFilter;
 use Modules\ImageFilter\Filter\Filter;
+use ReflectionClass;
+use function Clue\StreamFilter\fun;
 
 class ImageFilter
 {
@@ -30,15 +32,24 @@ class ImageFilter
         $object = new self();
         $image = (new ImageManager(Config::get('image')))->make($path);
         $filters = $object->getRequestData() ?? [];
-        $configFilters = config('image-filter.filters');
+        $configFilters = $object->getConfigFilters();
+
         foreach ($filters as $key => $filter) {
             if (isset($configFilters[$key])) {
-                $filter = $object->getFilter($configFilters[$key], $filter);
-                $filter->apply($image);
+                $object->getFilter($configFilters[$key], $filter)->apply($image);
             } elseif (config('image-filter.disable_invalid_filter_query_exception')) {
                 throw new InvalidFilter($key);
             }
         }
+
         return $image;
+    }
+
+    public function getConfigFilters(): array
+    {
+        $filters = collect(config('image-filter.filters'));
+        return $filters->map(function ($filter) {
+            return is_subclass_of($filter, Filter::class);
+        })->toArray();
     }
 }
