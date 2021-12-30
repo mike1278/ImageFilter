@@ -1,6 +1,5 @@
 # Image filter
 
----
 This is a package for editing images before being returned by the server, in such a way that the original image remains.
 These edits are cached.
 
@@ -10,8 +9,6 @@ without restrictions.
 Its current integration is solely with laravel.
 
 ## Filters available
-
----
 
 - Resize: to edit the image size
 - Colorize: to edit the image colors
@@ -27,8 +24,6 @@ This url colorize the original image
 /images/{filename}?filters[colorize]=40
 
 ## Road map
-
----
 
 - [ ] Add more filters
 - [ ] Make test
