@@ -15,9 +15,9 @@ class InvalidParameterFilter extends HttpException
             $message = 'Minimum number of parameters not met';
         }
         if ($invalidParameter) {
-            $message = ($message != '' ?: ', ').'Invalid parameters';
+            $message = ($message != '' ?: ', ') . 'Invalid parameters';
         }
-        $message .= ' filter '.$filterName;
+        $message .= ' filter ' . $filterName;
 
         parent::__construct(Response::HTTP_BAD_REQUEST, $message);
     }

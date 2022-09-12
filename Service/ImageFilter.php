@@ -33,10 +33,9 @@ class ImageFilter
         $image = (new ImageManager(Config::get('image')))->make($path);
         $filters = $object->getRequestData() ?? [];
         $configFilters = $object->getConfigFilters();
-
         foreach ($filters as $key => $filter) {
             if (isset($configFilters[$key])) {
-                $object->getFilter($configFilters[$key], $filter)->apply($image);
+                $image = $object->getFilter($configFilters[$key], $filter)->apply($image);
             } elseif (config('image-filter.disable_invalid_filter_query_exception')) {
                 throw new InvalidFilter($key);
             }
@@ -48,7 +47,7 @@ class ImageFilter
     public function getConfigFilters(): array
     {
         $filters = collect(config('image-filter.filters'));
-        return $filters->map(function ($filter) {
+        return $filters->filter(function ($filter) {
             return is_subclass_of($filter, Filter::class);
         })->toArray();
     }

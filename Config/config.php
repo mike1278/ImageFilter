@@ -1,7 +1,9 @@
 <?php
 
 use Modules\ImageFilter\Filter\Colorize;
+use Modules\ImageFilter\Filter\Encode;
 use Modules\ImageFilter\Filter\Resize;
+use Modules\ImageFilter\Filter\Square;
 
 return [
     /*
@@ -59,6 +61,7 @@ return [
     | all class, need implement the interface Modules\ImageFilter\Filter\Filter
     */
     'filters' => [
+        'square' => Square::class,
         /*
         | parameters: width, height, aspectRatio, upsize
         | example: 200,,false, true | ,300,true,false | 300 | ,200
@@ -69,6 +72,11 @@ return [
         | example: 100,0,50 | 0,-50 | 40
         */
         'colorize' => Colorize::class,
+        /*
+        | parameters: encode, quality
+        | example: jpg,90 | webp | png,100
+        */
+        'encode' => Encode::class,
     ],
 
     /*

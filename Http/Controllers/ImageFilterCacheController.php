@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Intervention\Image\ImageManager;
 use Modules\ImageFilter\Service\ImageCache;
 use Modules\ImageFilter\Service\ImageFilter;
+use Str;
 
 class ImageFilterCacheController extends Controller
 {
@@ -28,6 +29,10 @@ class ImageFilterCacheController extends Controller
     public function getImage($filename): IlluminateResponse
     {
         $path = $this->getImagePath($filename);
+        // for svg
+        if (Str::contains($path, 'svg')) {
+            return $this->buildResponse(file_get_contents($path));
+        }
 
         $manager = new ImageManager(Config::get('image'));
         $content = (new ImageCache($manager))->cache(function () use ($path) {

@@ -12,13 +12,12 @@ class Resize implements Filter
     protected bool $aspectRatio;
     protected bool $upsize;
 
-    public function __construct(string $parameters)
+    public function __construct(array $parameters)
     {
-        $array = explode(',', $parameters);
-        $this->width = isset($array[0]) ? (int)$array[0] : null;
-        $this->height = isset($array[1]) ? (int)$array[1] : null;
-        $this->aspectRatio = isset($array[2]) && ($array[2] == 'true' || $array[2] == 1);
-        $this->upsize = isset($array[3]) && ($array[3] == 'true' || $array[3] == 1);
+        $this->width = isset($parameters['width']) ? (int)$parameters['width'] : null;
+        $this->height = isset($parameters['height']) ? (int)$parameters['height'] : null;
+        $this->aspectRatio = !isset($parameters['aspectRatio']) || $parameters['aspectRatio'] == 'true' || $parameters['aspectRatio'] == 1;
+        $this->upsize = isset($parameters['upsize']) && ($parameters['upsize'] == 'true' || $parameters['upsize'] == 1);
         if ($this->height == 0) {
             $this->height = null;
         }

@@ -11,12 +11,11 @@ class Colorize implements Filter
     protected int $green;
     protected int $blue;
 
-    public function __construct(string $parameters)
+    public function __construct(array $parameters)
     {
-        $array = explode(',', $parameters);
-        $this->red = isset($array[0]) ? (int)$array[0] : 0;
-        $this->green = isset($array[1]) ? (int)$array[1] : 0;
-        $this->blue = isset($array[2]) ? (int)$array[2] : 0;
+        $this->red = isset($parameters['red']) ? (int)$parameters['red'] : 0;
+        $this->green = isset($parameters['green']) ? (int)$parameters['green'] : 0;
+        $this->blue = isset($parameters['blue']) ? (int)$parameters['blue'] : 0;
     }
 
     public function apply(Image $image): Image
